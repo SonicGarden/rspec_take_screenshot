@@ -7,8 +7,10 @@ module Rspec
       def take_screenshot(name: nil, suffix: '')
         return unless ::Rspec::TakeScreenshot.configuration.enabled?
 
-        filename = name.presence || current_take_screenshot_example&.full_description&.gsub(' ', '/')
-        current_take_screenshot.call(page: page, name: filename, suffix: suffix)
+        handler = current_take_screenshot
+        example = current_take_screenshot_example
+        filename = name.presence || (example ? handler.name_with_example(example) : '')
+        handler.call(page: page, name: filename, suffix: suffix)
       end
 
       def current_take_screenshot

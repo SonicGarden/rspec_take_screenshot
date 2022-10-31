@@ -1,3 +1,5 @@
+require 'active_support/all'
+
 require_relative "take_screenshot/version"
 require_relative "take_screenshot/window_size"
 require_relative "take_screenshot/configuration"

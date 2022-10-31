@@ -29,7 +29,17 @@ module Rspec
         end
       end
 
+      def name_with_example(example)
+        example_descriptions(example.metadata).reject(&:blank?).join('/')
+      end
+
       private
+
+      def example_descriptions(metadata)
+        group = metadata[:example_group]
+        description = metadata[:description]
+        group ? example_descriptions(group) + [description] : [description]
+      end
 
       def temporary_resize(page, width, height)
         tmp_width = page.driver.browser.manage.window.size.width
