@@ -2,9 +2,34 @@ module Rspec
   module TakeScreenshot
     class Handler
       attr_accessor :example
+      attr_reader :count, :auto_increment
+
+      def initialize
+        super
+        @count = 0
+        @example = nil
+        @auto_increment = false
+      end
+
+      def enable_auto_increment
+        @auto_increment = true
+      end
+
+      def auto_increment?
+        self.auto_increment
+      end
 
       def configuration
         ::Rspec::TakeScreenshot.configuration
+      end
+
+      def reset
+        @count = 0
+        @example = nil
+      end
+
+      def count_up
+        @count += 1
       end
 
       def call(page:, name: nil, suffix: '')
