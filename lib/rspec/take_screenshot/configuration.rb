@@ -15,6 +15,10 @@ module Rspec
         ]
       end
 
+      def root_dir=(root_dir)
+        @root_dir = Rails.root.join(root_dir)
+      end
+
       def add_multi_sizes(name:, width:, height:)
         @window_sizes << [
           WindowSize.new(name: name, width: width, height: height)
